@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HeartLink Ultra Smooth</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #ff2d55;
+            --gold: #ffcc00;
+            --bg: #000000;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background: #000; color: #fff; height: 100vh; overflow: hidden; touch-action: none; }
+
+        .viewport {
+            width: 100%; height: 100%; max-width: 480px; margin: auto;
+            position: relative; background: var(--bg); overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 45, 85, 0.2);
+        }
+
+        .scene {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 25px;
+            opacity: 0; visibility: hidden; text-align: center;
+            z-index: 2; will-change: transform, opacity, filter;
+        }
+
+        .title-huge { font-size: 3rem; font-weight: 900; line-height: 1.1; letter-spacing: -1px; }
+        
+        .text-glow { 
+            color: var(--primary); 
+            text-shadow: 0 0 20px rgba(255, 45, 85, 0.6), 0 0 40px rgba(255, 45, 85, 0.3); 
+        }
+
+        .bg-container {
+            position: absolute; inset: 0; z-index: -1; overflow: hidden;
+        }
+        .bg-img {
+            width: 110%; height: 110%; object-fit: cover;
+            filter: brightness(0.4);
+            transform: scale(1.1);
+        }
+
+        .photo-canvas {
+            position: relative; width: 100%; height: 380px;
+            margin: 20px 0; perspective: 1200px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .cinematic-img { 
+            position: absolute; width: 240px; height: 320px; 
+            object-fit: cover; border-radius: 24px; 
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+            opacity: 0; will-change: transform, opacity;
+        }
+
+        .feat-container { width: 100%; padding: 0 10px; }
+        .feat-item {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            width: 100%; padding: 18px; margin: 12px 0; border-radius: 15px;
+            text-align: right; border-right: 5px solid var(--primary);
+            font-size: 1.1rem; font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button {
+            background: #fff; color: #000; padding: 20px 60px;
+            border-radius: 100px; font-weight: 900; font-size: 1.5rem;
+            margin-top: 30px; border: none; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .overlay-dim {
+            position: absolute; inset: 0; 
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.85) 100%); 
+            z-index: 1; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="viewport">
+        <div class="overlay-dim"></div>
+        
+        <div class="scene" id="scene1">
+            <div class="bg-container"><img src="https://files.catbox.moe/zy2xxl.jpg" class="bg-img" id="bg1"></div>
+            <h1 class="title-huge text-glow" id="mainLogoText">HeartLink</h1>
+            <p id="subText1" style="font-size: 1.3rem; margin-top: 20px; font-weight: 700; letter-spacing: 0.5px;">مش مجرد لينك… ده صندوق ذكريات خاص بيكم 🔐❤️</p>
+        </div>
+
+        <div class="scene" id="scene2">
+            <h2 class="title-huge" style="font-size: 2rem; margin-bottom: 30px;">عصر الهدايا التقليدية انتهى! 🚫</h2>
+            <div style="margin: 20px 0;">
+                <p class="fall-txt" style="font-size: 2.2rem; color: var(--gold); font-weight: 900; margin: 10px 0;">شكولاته 🍫</p>
+                <p class="fall-txt" style="font-size: 2.2rem; color: var(--gold); font-weight: 900; margin: 10px 0;">هدية 🎁</p>
+                <p class="fall-txt" style="font-size: 2.2rem; color: var(--gold); font-weight: 900; margin: 10px 0;">برفان 🧴</p>
+            </div>
+            <p id="subText2" style="font-size: 1.2rem; line-height: 1.6; max-width: 80%;">كل الهدايا بتخلص... هاديها بموقع كامل معمول عشانها هي وبس.. 😍</p>
+        </div>
+
+        <div class="scene" id="scene3">
+            <h2 style="font-size: 1.6rem; margin-bottom: 20px; font-weight: 800;">بكلماتك، صورك، وذكرياتكم.. 😍</h2>
+            <div class="photo-canvas">
+                <img src="https://files.catbox.moe/zy2xxl.jpg" class="cinematic-img">
+                <img src="https://files.catbox.moe/ycfzqc.jpg" class="cinematic-img">
+                <img src="https://files.catbox.moe/uoc67x.jpg" class="cinematic-img">
+            </div>
+            <p style="font-size: 1.3rem; color: var(--primary); font-weight: 900;">HeartLink إحساس بيفضل</p>
+        </div>
+
+        <div class="scene" id="scene4">
+            <p style="color: var(--gold); font-weight: 900; font-size: 1.4rem; margin-bottom: 20px;">أنت اللي بتختار التفاصيل: ✨</p>
+            <div class="feat-container">
+                <div class="feat-item">🔹 واجهة على ذوقك + باسورد خاص 🔐</div>
+                <div class="feat-item">🔹 رسالة من القلب ✍️</div>
+                <div class="feat-item">🔹 صور وفيديوهات بذكرياتكم 📸🎥</div>
+                <div class="feat-item">🔹 تصميم نهائي يخطف العين 😍</div>
+            </div>
+        </div>
+
+        <div class="scene" id="scene5">
+            <h2 class="title-huge text-glow" style="font-size: 2.5rem;">هدية مختلفة.. <br> ما تتنسيش 🎁</h2>
+            <p style="margin-top: 25px; font-size: 1.5rem; font-weight: 900; color: #fff;">📱 اللينك معاها مدى الحياة</p>
+            <button class="cta-button">اطلب السايت دلوقتي</button>
+        </div>
+    </div>
+
+    <script>
+        const mainTl = gsap.timeline({ defaults: { ease: "power4.inOut" } });
+
+        // إخفاء المشاهد وتحضير الصور
+        gsap.set(".scene", { autoAlpha: 0 });
+        gsap.set(".cinematic-img", { opacity: 0, y: 100, rotationY: 45 });
+
+        // --- المشهد 1: الدخول السينمائي ---
+        mainTl.to("#scene1", { autoAlpha: 1, duration: 2 })
+          .from("#bg1", { scale: 1.4, rotation: 3, duration: 6, ease: "power1.out" }, 0)
+          .from("#mainLogoText", { y: 80, opacity: 0, letterSpacing: "15px", filter: "blur(20px)", duration: 2.5 }, 0.3)
+          .from("#subText1", { y: 30, opacity: 0, duration: 1.5 }, "-=1.5")
+          .to("#scene1", { y: -100, filter: "blur(15px)", autoAlpha: 0, duration: 1.5, delay: 1.5 });
+
+        // --- المشهد 2: سقوط الكلمات (الدراما) ---
+        mainTl.to("#scene2", { autoAlpha: 1, duration: 1 }, "-=0.5")
+          .from("#scene2 h2", { scale: 0.9, opacity: 0, duration: 1 })
+          .from(".fall-txt", { 
+                y: -150, opacity: 0, stagger: 0.2, duration: 1.2, 
+                ease: "bounce.out", rotation: -10
+            }, "-=0.5")
+          .from("#subText2", { opacity: 0, y: 20, duration: 1 }, "-=0.5")
+          .to("#scene2", { scale: 1.2, autoAlpha: 0, filter: "blur(10px)", duration: 1.2, delay: 2 });
+
+        // --- المشهد 3: عرض الكروت ثلاثي الأبعاد ---
+        mainTl.to("#scene3", { autoAlpha: 1, duration: 1 })
+          .to(".cinematic-img", { 
+                opacity: 1, 
+                y: 0,
+                stagger: 0.35, 
+                duration: 1.8,
+                x: (i) => (i - 1) * 55, 
+                z: (i) => (i === 1 ? 120 : 0),
+                rotationY: (i) => (i - 1) * -25,
+                rotationZ: (i) => (i - 1) * 8,
+                ease: "expo.out"
+          }, "-=0.5")
+          .to("#scene3", { x: 200, autoAlpha: 0, duration: 1.2, delay: 2.5 });
+
+        // --- المشهد 4: ظهور المميزات بمرونة ---
+        mainTl.to("#scene4", { autoAlpha: 1, duration: 1 })
+          .from(".feat-item", { 
+                x: 100, opacity: 0, stagger: 0.2, duration: 1, 
+                ease: "elastic.out(1, 0.8)",
+                skewX: -15
+            })
+          .to("#scene4", { scale: 0.8, autoAlpha: 0, duration: 1, delay: 2.5 });
+
+        // --- المشهد 5: النهاية القوية ---
+        mainTl.to("#scene5", { autoAlpha: 1, duration: 1.5 })
+          .from("#scene5 h2", { y: -50, scale: 0.8, filter: "blur(15px)", opacity: 0, duration: 1.5 })
+          .from("#scene5 p", { opacity:0, y: 20, duration: 1 }, "-=0.5")
+          .from(".cta-button", { scale: 0, rotation: 15, duration: 1.2, ease: "back.out(2)" }, "-=0.8")
+          .to(".cta-button", { 
+                boxShadow: "0 0 40px rgba(255, 255, 255, 0.6)", 
+                scale: 1.05, 
+                repeat: -1, 
+                yoyo: true, 
+                duration: 0.8 
+            });
+    </script>
+</body>
+</html>
